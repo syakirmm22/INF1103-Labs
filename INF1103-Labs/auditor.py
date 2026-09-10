@@ -8,5 +8,13 @@ if stock.isdigit():
     total_inventory += stock_int
     print("Total inventory:", total_inventory)
 
+elif int(stock) < 0:
+    print("Invalid entry. Stock cannot be negative.")
+    failed_entries += 1
+
+else: 
+    print("Invalid entry. Please enter a whole number and not in word form.")
+    failed_entries += 1        
+
 
 
