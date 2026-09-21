@@ -28,15 +28,16 @@ def calculate_tax(stock_int): #calculates the tax for a specific delivery, retur
     tax = stock_int * 0.1
     return tax
 
-def generate_report(total_inventory, failed_entries): #final report 
+def generate_report(total_inventory, failed_entries, total_tax): #final report 
     print("Total Deliveries Processed:", total_inventory)
     print("Total Failed Entries:", failed_entries)
+    print("Total Tax Collected:", total_tax)
 
 
 #main loop to handle user input and process deliveries
 total_inventory = 0
 failed_entries = 0
-total_cost = 0
+total_tax = 0
 
 while total_inventory <= 500:
 
@@ -45,13 +46,13 @@ while total_inventory <= 500:
     if stock == 'QUIT':
         break
 
-    elif stock == None:
+    elif stock is None:
         failed_entries += 1
 
     else: 
         total_inventory = process_delivery(total_inventory, stock)
         tax_amount = calculate_tax(stock)
-        total_cost += tax_amount
+        total_tax += tax_amount
 
 
     if total_inventory > 500:
@@ -59,4 +60,4 @@ while total_inventory <= 500:
         break
         
 print("Final Report:")
-generate_report(total_inventory, failed_entries)
+generate_report(total_inventory, failed_entries, total_tax)
