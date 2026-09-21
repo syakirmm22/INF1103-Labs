@@ -36,6 +36,7 @@ def generate_report(total_inventory, failed_entries): #final report
 #main loop to handle user input and process deliveries
 total_inventory = 0
 failed_entries = 0
+total_cost = 0
 
 while total_inventory <= 500:
 
@@ -50,11 +51,12 @@ while total_inventory <= 500:
     else: 
         total_inventory = process_delivery(total_inventory, stock)
         tax_amount = calculate_tax(stock)
-       
+        total_cost += tax_amount
 
 
     if total_inventory > 500:
         print("Inventory limit reached. Cannot add more stock.")
         break
         
-print("Total Deliveries Processed:", total_inventory, "Total Failed Entries:", failed_entries)  
+print("Final Report:")
+generate_report(total_inventory, failed_entries)
