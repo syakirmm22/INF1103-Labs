@@ -19,6 +19,9 @@ def get_valid_input():
         print("Invalid input. Please enter a whole number.")
         return None
 
+def process_delivery(current_total, new_value):
+    return current_total + new_value    
+
 
 
 
