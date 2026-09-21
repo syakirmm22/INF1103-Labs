@@ -8,8 +8,9 @@
 
 #generate_report(total_units, failed_attempts): A dedicated function to print the final summary.
 
+#def functions to be implemented in the modular_auditor.py file
 
-def get_valid_input(): 
+def get_valid_input(): #main input function to get valid input from the user
     user_input = input("Enter a valid integer or 'QUIT' to exit: ")
     if user_input == 'QUIT':
         return "QUIT"
@@ -19,8 +20,9 @@ def get_valid_input():
         print("Invalid input. Please enter a whole number.")
         return None
 
-def process_delivery(current_total, new_value):
-    return current_total + new_value    
+def process_delivery(total_inventory, stock_int): #processes the delivery, returns new total inventory
+    new_value = total_inventory + stock_int
+    return new_value 
 
 
 
