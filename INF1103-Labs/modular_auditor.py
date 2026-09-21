@@ -24,6 +24,12 @@ def process_delivery(total_inventory, stock_int): #processes the delivery, retur
     new_value = total_inventory + stock_int
     return new_value 
 
+def calculate_tax(stock_int): #calculates the tax for a specific delivery, returns the tax amount
+    tax = stock_int * 0.1
+    return tax
+
+
+
 
 
 
