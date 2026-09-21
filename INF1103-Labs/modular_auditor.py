@@ -33,29 +33,24 @@ def generate_report(total_inventory, failed_entries): #final report
     print("Total Failed Entries:", failed_entries)
 
 
-
-
-
-
-
+#main loop to handle user input and process deliveries
 total_inventory = 0
 failed_entries = 0
 
 while total_inventory <= 500:
 
-    stock = input("Enter the stock inventory or enter 'QUIT' to exit: ")
+    stock = get_valid_input()
 
     if stock == 'QUIT':
         break
 
-    if stock.isdigit():
-        stock_int = int(stock)
-        total_inventory += stock_int
-        print("Total inventory:", total_inventory)
+    elif stock == None:
+        failed_entries += 1
 
     else: 
-        print("Negative value/Invalid entry. Please enter a whole number and not in word form.")
-        failed_entries += 1   
+        total_inventory = process_delivery(total_inventory, stock)
+        tax_amount = calculate_tax(stock)
+       
 
 
     if total_inventory > 500:
