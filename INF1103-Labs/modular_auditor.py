@@ -28,7 +28,9 @@ def calculate_tax(stock_int): #calculates the tax for a specific delivery, retur
     tax = stock_int * 0.1
     return tax
 
-
+def generate_report(total_inventory, failed_entries): #final report 
+    print("Total Deliveries Processed:", total_inventory)
+    print("Total Failed Entries:", failed_entries)
 
 
 
