@@ -1,15 +1,19 @@
 file_name = "inventory.txt"
-orders = [10001, "Wireless Mouse", 2], [10002, "Keyboard", 1], [10003, "USB Cable", 3]  #this is the initial order
+orders = [[1001, "Wireless Mouse", 2], [1002, "Keyboard", 1], [1003, "USB Cable", 3]]  #this is the initial order
      
 
 
-def read_orders():
+def load_inventory():
     try:
         with open(file_name, "r") as file:
-            orders = file.readlines()
-            return orders
+            lines = file.readlines()
+            if not lines:
+                return 0, []
+            total = float(lines[0].strip())
+            history = [float(line.strip()) for line in lines[1:]]
+            return total, history
     except FileNotFoundError:
-        return [] #Return an empty list if the file doesnt exist
+        return 0, [] #Return an empty list if the file doesnt exist
 
 def write_orders():
     with open(file_name, "w") as file:
