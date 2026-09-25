@@ -21,13 +21,6 @@ def write_orders():
 
 
 
-def get_load_inventory():
-
-
-
-
-
-def get_save_inventory():
 
 
 
