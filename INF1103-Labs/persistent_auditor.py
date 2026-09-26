@@ -25,8 +25,10 @@ def load_inventory():  #function to read from the file
 
 def save_inventory(total_inventory, transaction_history):  #function to write orders to the file
     with open(file_name, "w") as file:
-        new_list = file.writelines(total_inventory, transaction_history) 
-        return new_list  
+        lines_to_write = [str(total_inventory + "\n")]
+        for amount in transaction_history:
+            lines_to_write.append(str(amount) + "\n")
+            file.writelines(lines_to_write)
 
 def max_order_id():  #function to identify the highest order id
     max_id = starting_order_id
