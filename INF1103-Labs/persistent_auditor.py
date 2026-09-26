@@ -5,7 +5,7 @@ product_name = input("Enter Product Name: ")
 product_quantity = input("Enter Quantity: ")
 orders = [[1001, "Wireless Mouse", 2], [1002, "Keyboard", 1], [1003, "USB Cable", 3]]  #this is the initial order
 #-----Prev wk3------------
-total_inventory = 0
+total_inventory, transaction_history = load_inventory()
 failed_entries = 0
 total_tax = 0  
 transaction_history = [product_name, product_quantity, calculate_tax() ]
@@ -88,6 +88,7 @@ while total_inventory <= 500:
     stock = get_valid_input()
 
     if stock == 'QUIT':
+        save_inventory(total_inventory, transaction_history)
         break
         
         
@@ -101,6 +102,7 @@ while total_inventory <= 500:
         total_inventory = process_delivery(total_inventory, stock)
         tax_amount = calculate_tax(stock)
         total_tax += tax_amount
+        transaction_history.append(stock)  #save txn hist as its confirmed
         print("Total Inventory:", total_inventory)
         print("Tax for this delivery:", tax_amount)
         print("Total failed entries:", failed_entries)
