@@ -1,29 +1,35 @@
 file_name = "inventory.txt"
-#orders = [[1001, "Wireless Mouse", 2], [1002, "Keyboard", 1], [1003, "USB Cable", 3]]  #this is the initial order
+starting_order_id = 1001
+orders = [[1001, "Wireless Mouse", 2], [1002, "Keyboard", 1], [1003, "USB Cable", 3]]  #this is the initial order
      
+#-----Functions------
 
-
-def load_inventory():
+def read_file():  #function to read from the file
     try:
         with open(file_name, "r") as file:
-            lines = file.readlines()
-            if not lines:
-                return 0, []
-            total = float(lines[0].strip())
-            history = [float(line.strip()) for line in lines[1:]]
-            return total, history
+            orders = file.readlines()
+            return orders
     except FileNotFoundError:
-        return 0, [] #Return an empty list if the file doesnt exist
+        return []  # Return an empty list if the file doesn't exist   
 
-def save_inventory(total, history):  
+def write_orders(orders):  #function to write orders to the file
     with open(file_name, "w") as file:
-        file.write(str(total) + "\n")
-        for amount in history:
-            file.write(str(amount) + "\n")
+        file.writelines(orders) 
+        return orders  
+
+def max_order_id():  #function to identify the highest order id
+    max_id = starting_order_id
+    for order in read_file:
+        split_order = int(order.split(",")[0]) #splits the orders into integers only(id)    
+        if split_order > max_id:
+            max_id = split_order
+            return max_id         
 
         
 
-        
+product_name = input("Enter Product Name: ")  
+
+product_quantity = input("Enter Quantity: ")
        
         
 
