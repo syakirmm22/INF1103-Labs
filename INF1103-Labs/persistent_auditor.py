@@ -29,7 +29,14 @@ def generate_order_id(): #func to create new ID
     new_id = max_order_id(read_file, starting_order_id) + 1 
     return new_id         
 
-  
+def append_orders(): #func to add new orders to the list n file
+    with open(file_name,"a") as file:
+        new_order = file.write(str(generate_order_id()), product_name, product_quantity)
+        return new_order
+
+    
+
+
 
         
 
