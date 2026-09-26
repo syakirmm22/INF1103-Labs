@@ -1,15 +1,14 @@
 
-file_name = "inventory.txt"
 starting_order_id = 1001
 product_name = input("Enter Product Name: ")  
 product_quantity = input("Enter Quantity: ")
 orders = [[1001, "Wireless Mouse", 2], [1002, "Keyboard", 1], [1003, "USB Cable", 3]]  #this is the initial order
 #-----Prev wk3------------
-total_inventory, transaction_history = load_inventory()
-failed_entries = 0
-total_tax = 0  
-transaction_history = [product_name, product_quantity, calculate_tax() ]
+
+
 #-----Functions------
+
+file_name = "inventory.txt"
 
 def load_inventory():  #function to read from the file
     try:
@@ -25,27 +24,11 @@ def load_inventory():  #function to read from the file
 
 def save_inventory(total_inventory, transaction_history):  #function to write orders to the file
     with open(file_name, "w") as file:
-        lines_to_write = [str(total_inventory + "\n")]
+        lines_to_write = [(str(total_inventory) + "\n")]
         for amount in transaction_history:
             lines_to_write.append(str(amount) + "\n")
-            file.writelines(lines_to_write)
-
-def max_order_id():  #function to identify the highest order id
-    max_id = starting_order_id
-    for order in load_inventory:
-        split_order = int(order.split(",")[0]) #splits the orders into integers only(id)    
-        if split_order > max_id:
-            max_id = split_order
-            return max_id  
-
-def generate_order_id(): #func to create new ID
-    new_id = max_order_id(load_inventory, starting_order_id) + 1 
-    return new_id         
-
-def append_orders(): #func to add new orders to the list n file
-    with open(file_name,"a") as file:
-        new_order = file.write(str(generate_order_id()), product_name, product_quantity)
-        return new_order
+        
+        file.writelines(lines_to_write)
 
   #-------Prev----------
 
@@ -77,7 +60,9 @@ def generate_report(total_inventory, failed_entries, total_tax): #final report
        
         
 
-
+total_inventory, transaction_history = load_inventory()
+failed_entries = 0
+total_tax = 0  
 
 
 
@@ -88,7 +73,7 @@ while total_inventory <= 500:
     stock = get_valid_input()
 
     if stock == 'QUIT':
-        save_inventory(total_inventory, transaction_history)
+        
         break
         
         
@@ -112,7 +97,8 @@ while total_inventory <= 500:
     if total_inventory > 500:
         print("Inventory limit reached. Cannot add more stock.")
         break
-        
+
+save_inventory(total_inventory, transaction_history)     #saves even when the limit is hit   
 print("Final Report:")
 generate_report(total_inventory, failed_entries, total_tax)
 
