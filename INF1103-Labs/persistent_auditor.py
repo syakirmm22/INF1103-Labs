@@ -23,7 +23,13 @@ def max_order_id():  #function to identify the highest order id
         split_order = int(order.split(",")[0]) #splits the orders into integers only(id)    
         if split_order > max_id:
             max_id = split_order
-            return max_id         
+            return max_id  
+
+def generate_order_id(): #func to create new ID
+    new_id = max_order_id(read_file, starting_order_id) + 1 
+    return new_id         
+
+  
 
         
 
