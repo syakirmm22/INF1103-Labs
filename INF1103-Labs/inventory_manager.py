@@ -22,7 +22,7 @@ def save_inventory(inventories): #function to save inventory data to a JSON file
 def display_inventory(): #function to dislay inventory
     inventories = load_inventory()
     for inventory in inventories:
-      print(f"ID: {inventory['id']}, Name: {inventory['name']}, Price: ${inventory['price']:.2f}, Stock: {inventory['stock']}")
+      print(inventory["id"], inventory["name"], inventory["price"], inventory["stock"])
 
 
 
