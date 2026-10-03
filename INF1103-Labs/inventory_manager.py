@@ -26,8 +26,9 @@ def save_inventory(inventories): #function to save inventory data to a JSON file
 
 def display_inventory(): #function to dislay inventory
     inventories = load_inventory()
-    inventories.json.writelines(inventories)
-    
+    for inventory in inventories:
+        print(inventory["id"], inventory["name"], inventory["price"], inventory["stock"])
+
     #for inventory in inventories:
       #print(inventory["id"], inventory["name"], inventory["price"], inventory["stock"])
 
@@ -39,3 +40,38 @@ def add_inventory(): #function to add new inventory
 
     inventories.append(new_product) #adds the new product to the inventory list
     save_inventory(inventories)  #saves the updated inventory list to the JSON file
+
+
+def update_stock():  #function to update stock of an existing product
+    inventories = load_inventory()
+    try:
+        product_id = int(input("Enter product ID to update stock (enter '0' to cancel): "))
+        
+    except ValueError:
+        print("Invalid product ID. Please enter a valid integer.")
+        update_stock()
+        return
+
+    if product_id == 0:
+        print("Stock update canceled.")
+        return
+
+    for inventory in inventories:
+        if inventory["id"] == product_id:
+            try:
+                new_stock = int(input("Enter new stock quantity: "))
+            except ValueError:
+                print("Invalid stock quantity. Please enter a valid integer.")
+                update_stock()
+                return
+            inventory["stock"] = new_stock #updates the stock of the product
+            save_inventory(inventories)  #saves the updated inventory list to the JSON file
+            print("Stock for product ID: ", product_id, "updated to", new_stock)
+            break
+
+    
+    else:
+        print("Product ID not found.")
+        update_stock()  #calls the update_stock function to update stock of a product
+
+   
