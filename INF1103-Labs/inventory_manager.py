@@ -9,8 +9,11 @@ inventories = [       #inventory list n dictionary
 ]
 
 def load_inventory(): #function to load inventory data from a JSON file
-    with open("inventories.json", "r") as file:
-        return json.load(file)
+    try:
+        with open("inventories.json", "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return inventories  #returns the default inventory list if the file is not found
 
 def save_inventory(inventories): #function to save inventory data to a JSON file
     with open("inventories.json", "w") as file:
