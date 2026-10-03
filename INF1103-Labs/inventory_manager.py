@@ -74,4 +74,24 @@ def update_stock():  #function to update stock of an existing product
         print("Product ID not found.")
         update_stock()  #calls the update_stock function to update stock of a product
 
-   
+
+
+def search_inventory(): #function to search for a product
+    inventories = load_inventory()
+    try:
+        product_id = int(input("Enter product ID to search (enter '0' to cancel): "))
+    except ValueError:
+        print("Invalid product ID. Please enter a valid integer.")
+        search_inventory()
+        return
+    if product_id == 0:
+        print("Search canceled.")
+        return
+
+    for inventory in inventories:
+        if product_id == inventory["id"]:
+            print("Product found: ", inventory)
+            break
+    else:
+        print("Product not found.")
+        search_inventory()  #calls the search_inventory function to search for a product
