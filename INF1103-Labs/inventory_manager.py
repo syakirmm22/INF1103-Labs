@@ -27,17 +27,18 @@ def save_inventory(inventories): #function to save inventory data to a JSON file
 def display_inventory(): #function to dislay inventory
     inventories = load_inventory()
     for inventory in inventories:
-        print(inventory["id"], inventory["name"], inventory["price"], inventory["stock"])
+        print(f"Product ID: {inventory['id']}, Name: {inventory['name']}, Price: ${inventory['price']:.2f}, Stock: {inventory['stock']}\n")
 
 
 
 def add_inventory(): #function to add new inventory
     inventories = load_inventory()
 
-    new_product = {"id" : int(input("Enter product ID: ")),"name" : input("Enter product name: "),"price" : float(input("Enter product price: ")),"stock" : int(input("Enter product stock: "))}
+    new_product = {"id" : int(input("Enter product ID: \n")),"name" : input("Enter product name: \n"),"price" : float(input("Enter product price: \n")),"stock" : int(input("Enter product stock: \n"))}
 
     inventories.append(new_product) #adds the new product to the inventory list
     save_inventory(inventories)  #saves the updated inventory list to the JSON file
+    print(f"Product: {new_product['name'] } added successfully.")
 
 
 def update_stock():  #function to update stock of an existing product
@@ -64,7 +65,7 @@ def update_stock():  #function to update stock of an existing product
                 return
             inventory["stock"] = new_stock #updates the stock of the product
             save_inventory(inventories)  #saves the updated inventory list to the JSON file
-            print("Stock for product ID: ", product_id, "updated to", new_stock)
+            print(f"Stock for product ID: {product_id} updated to {new_stock}")
             break
 
     
@@ -88,7 +89,10 @@ def search_inventory(): #function to search for a product
 
     for inventory in inventories:
         if product_id == inventory["id"]:
-            print("Product found: ", inventory)
+            print(f"Product found: Product ID: {inventory['id']}\n")
+            print(f"Name: {inventory['name']}\n")
+            print(f"Price: ${inventory['price']:.2f}\n")
+            print(f"Stock: {inventory['stock']}\n")
             break
     else:
         print("Product not found.")
@@ -112,9 +116,9 @@ print("5. Exit\n")
 
 while True:
     try: 
-        choice = int(input("Enter your choice (1-5): "))
+        choice = int(input("Enter your choice (1-5): \n"))
     except ValueError:
-        print("Option not valid. Please enter a number between 1 and 5.")
+        print("Option not valid. Please enter a number between 1 and 5.\n")
         continue
     if choice == 1:
         display_inventory()
@@ -125,5 +129,5 @@ while True:
     elif choice == 4:
         search_inventory()
     elif choice == 5:
-        print("Exiting the program.")
+        print("Exiting the program.\n")
         break    #exit the loop and terminate the program        
