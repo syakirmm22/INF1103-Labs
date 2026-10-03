@@ -29,8 +29,6 @@ def display_inventory(): #function to dislay inventory
     for inventory in inventories:
         print(inventory["id"], inventory["name"], inventory["price"], inventory["stock"])
 
-    #for inventory in inventories:
-      #print(inventory["id"], inventory["name"], inventory["price"], inventory["stock"])
 
 
 def add_inventory(): #function to add new inventory
@@ -95,3 +93,37 @@ def search_inventory(): #function to search for a product
     else:
         print("Product not found.")
         search_inventory()  #calls the search_inventory function to search for a product
+
+
+#---MAIN MENU FUNCTION---#
+
+print(
+    "--------------------------------------------\n"
+    "        INVENTORY MANAGEMENT SYSTEM\n"
+    "--------------------------------------------\n"
+)
+
+print("Main Menu:\n")
+print("1. Display Inventory\n")
+print("2. Add Product\n")
+print("3. Update Stock\n")
+print("4. Search Product\n")
+print("5. Exit\n")
+
+while True:
+    try: 
+        choice = int(input("Enter your choice (1-5): "))
+    except ValueError:
+        print("Option not valid. Please enter a number between 1 and 5.")
+        continue
+    if choice == 1:
+        display_inventory()
+    elif choice == 2:
+        add_inventory()
+    elif choice == 3:
+        update_stock()
+    elif choice == 4:
+        search_inventory()
+    elif choice == 5:
+        print("Exiting the program.")
+        break    #exit the loop and terminate the program        
