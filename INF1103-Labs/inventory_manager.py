@@ -20,6 +20,8 @@ def load_inventory(): #function to load inventory data from a JSON file
 def save_inventory(inventories): #function to save inventory data to a JSON file
     with open("inventories.json", "w") as file:
         json.dump(inventories, file)
+        print("Saving Inventory...")
+        print("All is up to date")
 
 
 #----MAIN FUNCTIONS----#
@@ -112,7 +114,8 @@ print("1. Display Inventory\n")
 print("2. Add Product\n")
 print("3. Update Stock\n")
 print("4. Search Product\n")
-print("5. Exit\n")
+print("5. Save Inventory\n")
+print("6. Exit\n")
 
 while True:
     try: 
@@ -129,5 +132,7 @@ while True:
     elif choice == 4:
         search_inventory()
     elif choice == 5:
+        save_inventory(inventories)
+    elif choice == 6:
         print("Exiting the program.\n")
         break    #exit the loop and terminate the program        
