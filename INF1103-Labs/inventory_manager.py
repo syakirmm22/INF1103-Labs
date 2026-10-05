@@ -1,12 +1,5 @@
 import json
 
-inventories = [       #inventory list n dictionary
-    {"id" : 1001, "name" : "Laptop", "price" : 1200.00, "stock" : 45},
-
-{"id" : 1002, "name" : "Mouse", "price" : 50.00, "stock" : 150},
-
-{"id" : 1003, "name" : "Keyboard", "price" : 70.00, "stock" : 134}
-]
 
 #------JSON FILE HANDLING FUNCTIONS------#
 
@@ -15,7 +8,7 @@ def load_inventory(): #function to load inventory data from a JSON file
         with open("inventories.json", "r") as file:
             return json.load(file)
     except FileNotFoundError:
-        return inventories  #returns the default inventory list if the file is not found
+        return [] #returns the default inventory list if the file is not found
 
 def save_inventory(inventories): #function to save inventory data to a JSON file
     with open("inventories.json", "w") as file:
@@ -26,34 +19,40 @@ def save_inventory(inventories): #function to save inventory data to a JSON file
 
 #----MAIN FUNCTIONS----#
 
-def display_inventory(): #function to dislay inventory
+def display_inventory(inventories): #function to dislay inventory
     
     for inventory in inventories:
         print(f"Product ID: {inventory['id']}, Name: {inventory['name']}, Price: ${inventory['price']:.2f}, Stock: {inventory['stock']}\n")
 
 
 
-def add_inventory(): #function to add new inventory
+def add_inventory(inventories): #function to add new inventory
     
+    try:
 
-    new_product = {"id" : int(input("Enter product ID: \n")),"name" : input("Enter product name: \n"),"price" : float(input("Enter product price: \n")),"stock" : int(input("Enter product stock: \n"))}
+        new_product = {"id" : input("Enter product ID: \n").strip().upper(),"name" : input("Enter product name: \n"),"price" : float(input("Enter product price: \n")),"stock" : int(input("Enter product stock: \n"))}
+    except ValueError:
+        print("Invalid entries, please try again.") #PRevent errors to input
+        add_inventory(inventories)
+        return
+
+    for inventory in inventories:
+        if new_product["id"] == inventory["id"]:
+            print("Duplicate ID, please enter a unique ID")
+            return add_inventory(inventories)
+
 
     inventories.append(new_product) #adds the new product to the inventory list
-    save_inventory(inventories)  #saves the updated inventory list to the JSON file
+    
     print(f"Product: {new_product['name'] } added successfully.")
 
 
-def update_stock():  #function to update stock of an existing product
+def update_stock(inventories):  #function to update stock of an existing product
    
-    try:
-        product_id = int(input("Enter product ID to update stock (enter '0' to cancel): "))
-        
-    except ValueError:
-        print("Invalid product ID. Please enter a valid integer.")
-        update_stock()
-        return
+    
+    product_id = input(("Enter product ID to update stock (enter 'CANCEL' to cancel): ")).strip().upper()
 
-    if product_id == 0:
+    if product_id.upper() == "CANCEL":
         print("Stock update canceled.")
         return
 
@@ -63,29 +62,27 @@ def update_stock():  #function to update stock of an existing product
                 new_stock = int(input("Enter new stock quantity: "))
             except ValueError:
                 print("Invalid stock quantity. Please enter a valid integer.")
-                update_stock()
+                update_stock(inventories)
                 return
             inventory["stock"] = new_stock #updates the stock of the product
-            save_inventory(inventories)  #saves the updated inventory list to the JSON file
+           
             print(f"Stock for product ID: {product_id} updated to {new_stock}")
             break
 
     
     else:
         print("Product ID not found.")
-        update_stock()  #calls the update_stock function to update stock of a product
+        update_stock(inventories)  #calls the update_stock function to update stock of a product
 
 
 
-def search_inventory(): #function to search for a product
+def search_inventory(inventories): #function to search for a product
     
-    try:
-        product_id = int(input("Enter product ID to search (enter '0' to cancel): "))
-    except ValueError:
-        print("Invalid product ID. Please enter a valid integer.")
-        search_inventory()
-        return
-    if product_id == 0:
+    
+    product_id = (input("Enter product ID to search (enter 'CANCEL' to cancel): ")).strip().upper()
+    
+        
+    if product_id.upper() == "CANCEL":
         print("Search canceled.")
         return
 
@@ -98,7 +95,7 @@ def search_inventory(): #function to search for a product
             break
     else:
         print("Product not found.")
-        search_inventory()  #calls the search_inventory function to search for a product
+        search_inventory(inventories)  #calls the search_inventory function to search for a product
 
 
 #---MAIN MENU FUNCTION---#
@@ -109,7 +106,7 @@ print(
     "--------------------------------------------\n"
 )
 
-load_inventory() #load inventory first
+inventories = load_inventory() #load inventory first
 
 print("Main Menu:\n")
 print("1. Display Inventory\n")
@@ -121,20 +118,26 @@ print("6. Exit\n")
 
 while True:
     try: 
-        choice = int(input("Enter your choice (1-5): \n"))
+        choice = int(input("Enter your choice (1-6): \n"))
     except ValueError:
-        print("Option not valid. Please enter a number between 1 and 5.\n")
+        print("Option not valid. Please enter a number between 1 and 6.\n")
         continue
     if choice == 1:
-        display_inventory()
+        display_inventory(inventories)
     elif choice == 2:
-        add_inventory()
+        add_inventory(inventories)
     elif choice == 3:
-        update_stock()
+        update_stock(inventories)
     elif choice == 4:
-        search_inventory()
+        search_inventory(inventories)
     elif choice == 5:
         save_inventory(inventories)
     elif choice == 6:
         print("Exiting the program.\n")
+        
+        print("Saving inventory before exit....")
+
+        save_inventory(inventories) #final save
+
+        print("All done. Goodbye")
         break    #exit the loop and terminate the program        
