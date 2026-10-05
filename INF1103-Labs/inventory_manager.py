@@ -27,14 +27,14 @@ def save_inventory(inventories): #function to save inventory data to a JSON file
 #----MAIN FUNCTIONS----#
 
 def display_inventory(): #function to dislay inventory
-    inventories = load_inventory()
+    
     for inventory in inventories:
         print(f"Product ID: {inventory['id']}, Name: {inventory['name']}, Price: ${inventory['price']:.2f}, Stock: {inventory['stock']}\n")
 
 
 
 def add_inventory(): #function to add new inventory
-    inventories = load_inventory()
+    
 
     new_product = {"id" : int(input("Enter product ID: \n")),"name" : input("Enter product name: \n"),"price" : float(input("Enter product price: \n")),"stock" : int(input("Enter product stock: \n"))}
 
@@ -44,7 +44,7 @@ def add_inventory(): #function to add new inventory
 
 
 def update_stock():  #function to update stock of an existing product
-    inventories = load_inventory()
+   
     try:
         product_id = int(input("Enter product ID to update stock (enter '0' to cancel): "))
         
@@ -78,7 +78,7 @@ def update_stock():  #function to update stock of an existing product
 
 
 def search_inventory(): #function to search for a product
-    inventories = load_inventory()
+    
     try:
         product_id = int(input("Enter product ID to search (enter '0' to cancel): "))
     except ValueError:
@@ -108,6 +108,8 @@ print(
     "        INVENTORY MANAGEMENT SYSTEM\n"
     "--------------------------------------------\n"
 )
+
+load_inventory() #load inventory first
 
 print("Main Menu:\n")
 print("1. Display Inventory\n")
