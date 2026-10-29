@@ -38,6 +38,24 @@ import json
 
 #load n save inventory
 
+def load_inventory():
+    try:
+        with open("inventories.json", "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return []
+
+
+def save_inventory():
+        with open("inventories.json", "w") as file:
+            return json.dump(inventories, file)
+        print("Saving Inventory....")
+        print("Save Completed!")
+
+
+
+
+
 class Product:
     def __init__(self, product_id, name, price, stock):
         self.__name = name
