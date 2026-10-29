@@ -34,6 +34,10 @@
 
 #start of class product
 
+import json
+
+#load n save inventory
+
 class Product:
     def __init__(self, product_id, name, price, stock):
         self.__name = name
@@ -97,6 +101,26 @@ class Inventory:
             for product in self.__products:
                 product.display_information()
                 print() #to separate the prints
+
+
+
+#---MAIN MENU FUNCTION---#
+
+print(
+    "--------------------------------------------\n"
+    "        INVENTORY MANAGEMENT SYSTEM\n"
+    "--------------------------------------------\n"
+)
+
+inventories = load_inventory() #load inventory first
+
+print("Main Menu:\n")
+print("1. Display All Products\n")
+print("2. Add a Product\n")
+print("3. Update Stock\n")
+print("4. Search For a Product\n")
+print("5. Save Inventory\n")
+print("6. Exit\n")                
                 
          
 
