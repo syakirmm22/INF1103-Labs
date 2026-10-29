@@ -32,7 +32,7 @@
 # + get_all_products(): list[Product]
 
 
-#start of class product
+
 
 import json
 
@@ -40,20 +40,20 @@ import json
 
 def load_inventory():
     try:
-        with open("inventories.json", "r") as file:
+        with open("inventory.json", "r") as file:
             return json.load(file)
     except FileNotFoundError:
         return []
 
 
-def save_inventory():
-        with open("inventories.json", "w") as file:
-            return json.dump(inventories, file)
+def save_inventory(inventory):
+        with open("inventory.json", "w") as file:
+            json.dump(inventory, file)
         print("Saving Inventory....")
         print("Save Completed!")
 
 
-
+#start of class product
 
 
 class Product:
@@ -138,9 +138,32 @@ print("2. Add a Product\n")
 print("3. Update Stock\n")
 print("4. Search For a Product\n")
 print("5. Save Inventory\n")
-print("6. Exit\n")                
+print("6. Exit\n")   
+
+#Creating the Products
+
+inventory = Inventory() #creating the inventory object from its class
+
+product1 = Product("P001", "Mouse", 50.00, 125) #creating the product from its class
+product2 = Product("P002", "Keyboard", 80.00, 105) 
+
+inventory.add_product(product1) #passing the product into inventory class to be stored in a list
+inventory.add_product(product2)
+
+
                 
-         
+while True:
+    try:
+        choice = int(input("Enter your choice (1-6): \n"))
+
+    except ValueError:
+        print("Invalid Option. Try Again\n")    
+        continue
+
+    if choice == 1:
+        Inventory.display_all()
+
+
 
 
 
