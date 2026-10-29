@@ -172,13 +172,13 @@ if len(inventory.get_all_products()) == 0:
                 
 while True:
 
-    print("Main Menu:\n")
-    print("1. Display All Products\n")
-    print("2. Add a Product\n")
-    print("3. Update Stock\n")
-    print("4. Search For a Product\n")
-    print("5. Save Inventory\n")
-    print("6. Exit\n")   
+    print("Main Menu:")
+    print("1. Display All Products")
+    print("2. Add a Product")
+    print("3. Update Stock")
+    print("4. Search For a Product")
+    print("5. Save Inventory")
+    print("6. Exit")   
     try:
         choice = int(input("Enter your choice (1-6): \n"))
 
