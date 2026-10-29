@@ -26,7 +26,7 @@
 
 #methods: 
 
-# + add_products(produt : Product): void
+# + add_product(produt : Product): void
 # + search_product(product_id : String): Product
 # + display_all(): void
 # + get_all_products(): list[Product]
@@ -65,10 +65,43 @@ class Product:
             return True
 
     def display_information(self):
-            print(f"ID: {self.__product_id}\n")
-            print(f"Name: {self.__name}\n")
-            print(f"Price: ${self.__price:.2f}\n")
-            print(f"Stock: {self.__stock}\n") 
+            print(f"ID: {self.__product_id}")
+            print(f"Name: {self.__name}")
+            print(f"Price: ${self.__price:.2f}")
+            print(f"Stock: {self.__stock}") 
+
+#class of inventory
+
+class Inventory:
+    def __init__(self):
+        self.__products = []
+
+    # methods
+
+    def add_product(self, product):
+        self.__products.append(product)
+
+    def search_product(self, product_id):
+        for product in self.__products:
+            if product_id == product.get_product_id():
+                return product
+        
+        return None
+
+                
+
+    def display_all(self):
+        if len(self.__products) == 0:
+            print("No products yet")
+        else:
+            for product in self.__products:
+                product.display_information()
+                print() #to separate the prints
+                
+         
+
+
+
 
             
             
