@@ -54,6 +54,7 @@ def load_inventory(inventory):
     
 
 def save_inventory(inventory):
+    print("Saving Inventory....")
     data = []
     for product in inventory.get_all_products():
         data.append({
@@ -64,8 +65,8 @@ def save_inventory(inventory):
         })
 
     with open("inventory.json", "w") as file:
-        json.dump(data, file)
-        print("Saving Inventory....")
+        json.dump(data, file, indent=4)
+        
         print("Save Completed!")
             
         
@@ -161,11 +162,11 @@ print(
 
 inventory = Inventory() #creating the inventory object from its class
 
-product1 = Product("P001", "Mouse", 50.00, 125) #creating the product from its class
-product2 = Product("P002", "Keyboard", 80.00, 105) 
+load_inventory(inventory) #load inventory first
 
-inventory.add_product(product1) #passing the product into inventory class to be stored in a list
-inventory.add_product(product2)
+if len(inventory.get_all_products()) == 0:   
+    inventory.add_product(Product("P001", "Mouse", 50.00, 125))
+    inventory.add_product(Product("P002", "Keyboard", 80.00, 105))
 
 
                 
@@ -258,7 +259,8 @@ while True:
             
             print("Saving inventory before exit....")
     
-    
+            save_inventory(inventory)
+            
             print("All done. Goodbye")
             break    #exit the loop and terminate the program           
             
