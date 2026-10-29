@@ -130,15 +130,8 @@ print(
     "--------------------------------------------\n"
 )
 
-inventories = load_inventory() #load inventory first
 
-print("Main Menu:\n")
-print("1. Display All Products\n")
-print("2. Add a Product\n")
-print("3. Update Stock\n")
-print("4. Search For a Product\n")
-print("5. Save Inventory\n")
-print("6. Exit\n")   
+
 
 #Creating the Products
 
@@ -153,6 +146,14 @@ inventory.add_product(product2)
 
                 
 while True:
+
+    print("Main Menu:\n")
+    print("1. Display All Products\n")
+    print("2. Add a Product\n")
+    print("3. Update Stock\n")
+    print("4. Search For a Product\n")
+    print("5. Save Inventory\n")
+    print("6. Exit\n")   
     try:
         choice = int(input("Enter your choice (1-6): \n"))
 
@@ -161,7 +162,89 @@ while True:
         continue
 
     if choice == 1:
-        Inventory.display_all()
+        inventory.display_all()
+
+    elif choice == 2:
+        try:
+
+            product_id = input("Enter Product ID: \n").strip().upper()
+
+            if inventory.search_product(product_id) is not None:
+                print("Duplicate ID, Try Again")
+                continue
+
+
+            name = input("Enter Product Name: \n") 
+            price = float(input("Enter Product Price: \n"))   
+            stock = int(input("Enter Product Stock: \n"))
+        except ValueError:
+            print('Invalid Input. Try Again')    
+            continue
+
+        new_product = Product(product_id, name, price, stock)
+        inventory.add_product(new_product)
+        print(f"{name} successfully added\n")
+
+
+    elif choice == 3:
+        
+        product_id = input("Enter Product ID: \n").strip().upper()
+          
+        product = inventory.search_product(product_id)
+
+        if product is None:
+            print("No Product Found")
+            continue
+
+        else:
+            try:                
+                quantity = int(input("Enter Quantity To Add/Remove: \n"))
+            except ValueError:
+                print("Please enter an integer")    
+                continue
+
+            if product.update_stock(quantity):
+
+                print(f"Stock has been updated to {product.get_stock()}")
+            else:
+                print("Not Enough Stock To Remove")    
+
+       
+
+    elif choice == 4:
+
+        product_id = input("Enter Product ID: \n").strip().upper()
+
+        product = inventory.search_product(product_id)
+        
+        if product is None:
+            print("No Product Found")
+            continue
+
+        else:
+            product.display_information()
+
+
+
+
+    elif choice == 6:
+            print("Exiting the program.\n")
+            
+            print("Saving inventory before exit....")
+    
+    
+            print("All done. Goodbye")
+            break    #exit the loop and terminate the program           
+            
+
+        
+
+
+
+
+
+
+        
 
 
 
