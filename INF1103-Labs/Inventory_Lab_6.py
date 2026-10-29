@@ -38,19 +38,39 @@ import json
 
 #load n save inventory
 
-def load_inventory():
+def load_inventory(inventory):
     try:
         with open("inventory.json", "r") as file:
-            return json.load(file)
-    except FileNotFoundError:
-        return []
 
+            data = json.load(file)  #lists of dict
+
+            for item in data:
+                product = Product(item["id"], item["name"], item["price"], item["stock"])
+                inventory.add_product(product)
+    
+    except FileNotFoundError:
+        print("No Saved Inventory Found. Starting Empty")
+
+    
 
 def save_inventory(inventory):
-        with open("inventory.json", "w") as file:
-            json.dump(inventory, file)
+    data = []
+    for product in inventory.get_all_products():
+        data.append({
+            "id": product.get_product_id(),
+            "name": product.get_name(),
+            "price": product.get_price(),
+            "stock": product.get_stock()
+        })
+
+    with open("inventory.json", "w") as file:
+        json.dump(data, file)
         print("Saving Inventory....")
         print("Save Completed!")
+            
+        
+
+
 
 
 #start of class product
@@ -119,6 +139,10 @@ class Inventory:
             for product in self.__products:
                 product.display_information()
                 print() #to separate the prints
+
+
+    def get_all_products(self):
+        return self.__products            
 
 
 
@@ -225,6 +249,8 @@ while True:
             product.display_information()
 
 
+    elif choice == 5:
+        save_inventory(inventory)
 
 
     elif choice == 6:
@@ -236,7 +262,9 @@ while True:
             print("All done. Goodbye")
             break    #exit the loop and terminate the program           
             
-
+    else:
+        print("Please Enter (1-6) Only")
+        
         
 
 
