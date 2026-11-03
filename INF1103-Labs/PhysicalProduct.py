@@ -6,8 +6,17 @@ class PhysicalProduct(product.Product):
 
     #getter(read only for other classes)
 
-    def get_weight(self):
+    @property
+    def weight(self):
         return self.__weight
+
+    #setters (for internal use only)
+
+    @weight.setter
+    def set_weight(self, value):
+        if value < 0:
+            raise ValueError("Weight cannot be negative.")
+        self.__weight = value
 
     #methods
 
