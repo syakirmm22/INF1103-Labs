@@ -1,7 +1,7 @@
 import product
 import CanBeShipped
 
-class PhysicalProduct(product.Product, CanBeShipped):
+class PhysicalProduct(product.Product, CanBeShipped.CanBeShipped):
     def __init__(self, product_id, name, price, stock, weight):
         super().__init__(product_id, name, price, stock)
         self.__weight = weight
@@ -12,14 +12,12 @@ class PhysicalProduct(product.Product, CanBeShipped):
     def weight(self):
         return self.__weight
 
-    def calculate_shipping_cost(self):
-        #COST BASED ON WEIGHT ( $5 PER KG)
-        return self.__weight * 5
+  
 
     #setters (for internal use only)
 
     @weight.setter
-    def set_weight(self, value):
+    def weight(self, value):
         if value < 0:
             raise ValueError("Weight cannot be negative.")
         self.__weight = value
@@ -35,3 +33,7 @@ class PhysicalProduct(product.Product, CanBeShipped):
         super().display_information()
         print(f"Weight: {self.__weight} kg")
         print(f"Shipping Cost: ${self.calculate_shipping_cost():.2f}")
+
+    def calculate_shipping_cost(self):
+        #COST BASED ON WEIGHT ( $5 PER KG)
+        return self.__weight * 5.00
