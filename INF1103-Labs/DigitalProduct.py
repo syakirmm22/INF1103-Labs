@@ -6,8 +6,19 @@ class DigitalProduct(product.Product):
 
     #getter(read only for other classes)
 
-    def get_download_size(self):
+    @property
+    def download_size(self):
         return self._download_size
+
+
+    #setters (for internal use only)
+
+    @download_size.setter
+    def set_download_size(self, value):
+        if value < 0:
+            raise ValueError("Download size cannot be negative.")
+        self._download_size = value
+
 
     #methods
 
