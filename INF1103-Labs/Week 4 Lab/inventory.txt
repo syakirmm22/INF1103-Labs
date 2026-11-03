@@ -1,0 +1,4 @@
+50
+1000,wireless mouse,10
+1001,wireless earbuds,10
+1002,wireless earphones,30

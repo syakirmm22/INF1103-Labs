@@ -1,0 +1,76 @@
+Author: Syakir <2603220@singaporetech.edu.sg>
+Date:   Sat Sep 26 17:14:23 2026 +0800
+
+    FINALES
+
+commit c7d550642f7427fa2ae79b9fe120805004956fd9
+Author: Syakir <2603220@singaporetech.edu.sg>
+Date:   Sat Sep 26 15:26:12 2026 +0800
+
+    final upd
+
+commit e720e7f25666a402c4e2700a8560304748fa97fe
+Author: Syakir <2603220@singaporetech.edu.sg>
+Date:   Sat Sep 26 15:07:23 2026 +0800
+
+    else_upd
+
+commit 5f40a010f0b81ff5fe655f895c589d6d1c80bb75
+Author: Syakir <2603220@singaporetech.edu.sg>
+Date:   Sat Sep 26 14:54:11 2026 +0800
+
+    upd_part_2
+
+commit 34befbeb057277d4e0cf6a708aa190f0faa71e23
+Author: Syakir <2603220@singaporetech.edu.sg>
+Date:   Sat Sep 26 14:47:20 2026 +0800
+
+    upd
+
+commit ed975a5c3d81cd858740942da2bc543fc32b31f2
+Author: Syakir <2603220@singaporetech.edu.sg>
+Date:   Sat Sep 26 13:57:37 2026 +0800
+
+    append
+
+commit a28c6ca923213c973b8cffc2496544e76c915e41
+Author: Syakir <2603220@singaporetech.edu.sg>
+Date:   Sat Sep 26 13:48:05 2026 +0800
+
+    def_order
+
+commit 650cb6d6eb9fc85aaa316778b0fcc6de7c75d512
+Author: Syakir <2603220@singaporetech.edu.sg>
+Date:   Sat Sep 26 13:44:22 2026 +0800
+
+    def_max_order_&_write
+
+commit 2d6e12fbdde7cf3347f58ab6573d71cdc3261811
+Author: Syakir <2603220@singaporetech.edu.sg>
+Date:   Fri Sep 25 18:23:12 2026 +0800
+
+    def_save_inventory
+
+commit 35612f20dcfc1decf8d048828538d66c41c2fcec
+Author: Syakir <2603220@singaporetech.edu.sg>
+Date:   Fri Sep 25 17:38:45 2026 +0800
+
+    def_load_inventory
+
+commit eba6d4820694be461602cd0dda488f49a9a7940f
+Author: Syakir <2603220@singaporetech.edu.sg>
+Date:   Fri Sep 25 17:25:45 2026 +0800
+
+    def_write_orders
+
+commit f9dd2fe34cbc49e322236dce31e220a1ee727050
+Author: Syakir <2603220@singaporetech.edu.sg>
+Date:   Fri Sep 25 17:24:33 2026 +0800
+
+    test
+
+commit 7a5ae5038deee81c176ea206bb922856a857d263
+Author: Syakir <2603220@singaporetech.edu.sg>
+Date:   Fri Sep 25 16:55:50 2026 +0800
+
+    def_read_orders
