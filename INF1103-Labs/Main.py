@@ -144,33 +144,28 @@ while True:
             print("Invalid Option. Try Again\n")    
             continue
 
-        if product_type == 1:
-            try:
+        try:
+        
+            if product_type == 1:
                 weight = float(input("Enter Product weight (in kg): \n"))
-            except ValueError:
-                print("Invalid Input. Try Again\n")    
-                continue
+                new_product = PhysicalProduct.PhysicalProduct(product_id, name, price, stock, weight)
+                    
 
-            new_product = PhysicalProduct.PhysicalProduct(product_id, name, price, stock, weight)
-            inventory.add_product(new_product)
-            print(f"{name} successfully added\n")
+            elif product_type == 2:
+                file_size = float(input("Enter Product file size (in MB): \n"))
+                new_product = DigitalProduct.DigitalProduct(product_id, name, price, stock, file_size)
                 
 
-        elif product_type == 2:
-            try:
-                file_size = float(input("Enter Product file size (in MB): \n"))
-            except ValueError:
-                print("Invalid Input. Try Again\n")    
-                continue
+            else:
+                print("Invalid Option. Try Again\n")    
+                continue    
 
-            new_product = DigitalProduct.DigitalProduct(product_id, name, price, stock, file_size)
-            inventory.add_product(new_product)
-            print(f"{name} successfully added\n")
-
-        else:
-            print("Invalid Option. Try Again\n")    
+        except ValueError as e:
+            print(f"Error: {e}\n")    
             continue    
-
+       
+        inventory.add_product(new_product)
+        print(f"{name} successfully added\n")    
 
 
     elif choice == 3:
