@@ -90,15 +90,15 @@ def save_inventory(inventory):
             "stock": p.get_stock()
         }
 
-    if isinstance(p, PhysicalProduct.PhysicalProduct):
-        data["type"] = "Physical"
-        data["weight"] = p.weight
+        if isinstance(p, PhysicalProduct.PhysicalProduct):
+            item["type"] = "Physical"
+            item["weight"] = p.weight
 
-    elif isinstance(p, DigitalProduct.DigitalProduct):
-        data["type"] = "Digital"
-        data["download_size"] = p.download_size  
+        elif isinstance(p, DigitalProduct.DigitalProduct):
+            item["type"] = "Digital"
+            item["download_size"] = p.download_size  
 
-    data.append(item)  # Append the product data to the list
+        data.append(item)  # Append the product data to the list
 
 
     with open("inventory.json", "w") as file:
@@ -127,9 +127,9 @@ inventory = inventory.Inventory() #creating the inventory object from its class
 
 load_inventory(inventory) #load inventory first
 
-if len(inventory.get_all_products()) == 0:   
-    inventory.add_product(product.Product("P001", "Mouse", 50.00, 125))
-    inventory.add_product(product.Product("P002", "Keyboard", 80.00, 105))
+#if len(inventory.get_all_products()) == 0:   
+    #inventory.add_product(product.Product("P001", "Mouse", 50.00, 125))
+    #inventory.add_product(product.Product("P002", "Keyboard", 80.00, 105))
 
 
                 
