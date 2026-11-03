@@ -49,23 +49,57 @@ def load_inventory(inventory):
             data = json.load(file)  #lists of dict
 
             for item in data:
-                loaded_product = product.Product(item["id"], item["name"], item["price"], item["stock"])
+                if item["type"] == "Physical":
+                    loaded_product = PhysicalProduct.PhysicalProduct(
+                        item["id"],
+                        item["name"],
+                        item["price"],
+                        item["stock"],
+                        item["weight"]
+                    )
+
+                elif item["type"] == "Digital":
+                    loaded_product = DigitalProduct.DigitalProduct(
+                        item["id"],
+                        item["name"],
+                        item["price"],
+                        item["stock"],
+                        item["download_size"]
+                    )
+
+                else:
+                    print(f"Unknown product type for product ID {item['id']}. Skipping.")
+                    continue        
+
                 inventory.add_product(loaded_product)
 
     except FileNotFoundError:
         print("No Saved Inventory Found. Starting Empty")
 
 
+
+
 def save_inventory(inventory):
     data = []   #lists of dict
 
     for p in inventory.get_all_products():
-        data.append({
+        item = {
             "id": p.get_product_id(),
             "name": p.get_name(),
             "price": p.get_price(),
             "stock": p.get_stock()
-        })
+        }
+
+    if isinstance(p, PhysicalProduct.PhysicalProduct):
+        data["type"] = "Physical"
+        data["weight"] = p.weight
+
+    elif isinstance(p, DigitalProduct.DigitalProduct):
+        data["type"] = "Digital"
+        data["download_size"] = p.download_size  
+
+    data.append(item)  # Append the product data to the list
+
 
     with open("inventory.json", "w") as file:
         json.dump(data, file, indent=4)
